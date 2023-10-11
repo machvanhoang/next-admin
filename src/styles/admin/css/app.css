@@ -1,0 +1,291 @@
+.form-label {
+    color: #303030;
+    text-transform: initial;
+    font-size: 0.8125rem;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.form-select,
+.form-control {
+    border-color: #d9dbde;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #0052cc;
+}
+
+.font-small {
+    font-size: 0.815rem;
+}
+
+.card-header.custom {
+    padding: 1rem;
+}
+
+.card-header.custom h4 {
+    color: #303030;
+    font-weight: bold;
+    font-size: 0.925rem;
+    margin: 0rem;
+}
+
+.photoUpload-zone .photoUpload-detail {
+    text-align: center;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.photoUpload-zone .photoUpload-detail img {
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.photoUpload-zone .photoUpload-file {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    outline: 2px dashed #cdcdcd;
+    outline-offset: 0px;
+    padding: 2rem 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    font-weight: normal !important;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+}
+
+.photoUpload-zone .photoUpload-file i {
+    color: #6c7d8f;
+    font-size: 55px;
+    margin-bottom: 0.75rem;
+}
+
+.photoUpload-zone .photoUpload-file p {
+    margin: 0;
+    color: #767978;
+    font-size: 16px;
+}
+
+.photoUpload-zone .photoUpload-file .photoUpload-drop {
+    margin-bottom: 0.5rem;
+}
+
+.photoUpload-zone .photoUpload-file .photoUpload-choose {
+    color: #fff;
+}
+
+.photoUpload-zone .photoUpload-dimension {
+    font-weight: 700;
+}
+
+.photoUpload-zone .photoUpload-file input {
+    display: none;
+}
+
+.bg-gradient-success {
+    background: #0052cc;
+    border-color: #0052cc;
+    color: #Fff;
+}
+
+.appendMutipleFiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.appendMutipleFiles .file-item {
+    width: 49%;
+    margin-bottom: 0.5rem;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.appendMutipleFiles .file-item img {
+    max-width: 100%;
+    border-radius: 5px;
+    width: 202.52px;
+    height: 202.52px;
+}
+
+.appendMutipleFiles .file-item .deleteMediaItem {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    z-index: 9;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 3px;
+    padding: 0px;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+.appendMutipleFiles .file-item:hover:not(.loading):before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    z-index: 8;
+    display: block;
+    transition: all 0.4s ease;
+}
+
+.appendMutipleFiles .file-item:hover:not(.loading) .deleteMediaItem {
+    display: flex;
+}
+
+.appendMutipleFiles .file-item.loading {
+    position: relative;
+    width: 202.52px;
+    height: 202.52px;
+    background: #000000;
+}
+
+.appendMutipleFiles .file-item.loading:after {
+    content: "";
+    position: absolute;
+    z-index: 99;
+    width: 40px;
+    height: 40px;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btnAttributeEdit svg.bi-pencil {
+    display: inline-block;
+}
+
+.btnAttributeEdit svg.bi-x-lg {
+    display: none;
+}
+
+.btnAttributeEdit.open svg.bi-pencil {
+    display: none;
+}
+
+.btnAttributeEdit.open svg.bi-x-lg {
+    display: inline-block;
+}
+
+.btnAttributeValueAdd svg.bi-plus-lg {
+    display: inline-block;
+}
+
+.btnAttributeValueAdd svg.bi-x-square {
+    display: none;
+}
+
+.btnAttributeValueAdd.active svg.bi-plus-lg {
+    display: none;
+}
+
+.btnAttributeValueAdd.active svg.bi-x-square {
+    display: inline-block;
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    border-color: #198754;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control {
+    font-size: 90%;
+}
+
+.item-tag {
+    display: inline-block;
+}
+
+.item-tag__content {
+    background: #e3e3e3;
+    border-radius: 0.25rem;
+    min-height: 1.25rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+}
+
+.item-tag__content span {
+    font-size: 85%;
+}
+
+.item-tag__content:hover span {
+    color: #000;
+}
+
+.item-tag__content .btnRemoveTags {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 22px;
+}
+
+.item-tag__content .btnRemoveTags:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.item-tag__content .btnRemoveTags .svg {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: -1px;
+}
+
+.listTags {
+    margin-top: 0.5rem;
+}
