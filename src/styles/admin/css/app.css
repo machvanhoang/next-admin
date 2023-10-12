@@ -295,3 +295,13 @@
     text-decoration: none;
     line-height: 1;
 }
+
+.menu-vertical .menu-inner>.menu-item .menu-link {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+
+.app-logo img {
+    max-width: 150px;
+    height: auto,
+}

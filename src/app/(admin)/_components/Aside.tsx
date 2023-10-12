@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Logo from "./Logo";
 export default function Aside() {
   const stopEvent = (e: any) => {
     e.preventDefault();
@@ -10,74 +11,40 @@ export default function Aside() {
         id="layout-menu"
         className="layout-menu menu-vertical menu bg-menu-theme"
       >
-        <div className="app-brand demo">
-          <a href="index.html" className="app-brand-link">
-            <img
-              src="/assets/admin/images/logo_white.png"
-              alt="Logo"
-              style={{
-                maxWidth: "150px",
-                height: "auto",
-              }}
-            />
-          </a>
-
-          <a
-            href="#"
-            onClick={stopEvent}
-            className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
-          >
-            <i className="bx bx-chevron-left bx-sm align-middle"></i>
-          </a>
-        </div>
-
+        <Logo stopEvent={stopEvent} />
         <div className="menu-inner-shadow"></div>
-
         <ul className="menu-inner py-1">
           <li className="menu-item active open">
             <a href="#" onClick={stopEvent} className="menu-link">
               <i className="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Dashboards">Dashboards</div>
+              <div data-i18n="Home">Home</div>
             </a>
           </li>
           <li className="menu-header small text-uppercase">
-            <span className="menu-header-text">Apps &amp; Pages</span>
+            <span className="menu-header-text">Application</span>
+          </li>
+          <li className="menu-item">
+            <Link href={`/admin/orders`} className="menu-link">
+              <i className="menu-icon tf-icons bx bx-shopping-bag"></i>
+              <div data-i18n="Orders">Orders</div>
+            </Link>
           </li>
           <li className="menu-item">
             <Link href={`/admin/products`} className="menu-link">
-              <i className="menu-icon tf-icons bx bx-envelope"></i>
-              <div data-i18n="Email">Products</div>
+              <i className="menu-icon tf-icons bx bxl-product-hunt"></i>
+              <div data-i18n="Products">Products</div>
             </Link>
           </li>
           <li className="menu-item">
             <Link href={`/admin/customers`} className="menu-link">
-              <i className="menu-icon tf-icons bx bx-envelope"></i>
-              <div data-i18n="Email">Customers</div>
+              <i className="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="Customers">Customers</div>
             </Link>
-          </li>
-          <li className="menu-item">
-            <Link href={`/admin/configs`} className="menu-link">
-              <i className="menu-icon tf-icons bx bx-envelope"></i>
-              <div data-i18n="Email">Configs</div>
-            </Link>
-          </li>
-          <li className="menu-item">
-            <a
-              href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
-              target="_blank"
-              className="menu-link"
-            >
-              <i className="menu-icon tf-icons bx bx-envelope"></i>
-              <div data-i18n="Email">Email</div>
-              <div className="badge bg-label-primary fs-tiny rounded-pill ms-auto">
-                Pro
-              </div>
-            </a>
           </li>
           <li className="menu-item">
             <a href="#" onClick={stopEvent} className="menu-link menu-toggle">
-              <i className="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Layouts</div>
+              <i className="menu-icon tf-icons bx bx-news"></i>
+              <div data-i18n="Posts">Posts</div>
             </a>
 
             <ul className="menu-sub">
@@ -107,6 +74,21 @@ export default function Aside() {
                 </a>
               </li>
             </ul>
+          </li>
+          <li className="menu-header small text-uppercase">
+            <span className="menu-header-text">General</span>
+          </li>
+          <li className="menu-item">
+            <Link href={`/admin/settings`} className="menu-link">
+              <i className="menu-icon tf-icons bx bx-cog"></i>
+              <div data-i18n="Email">Settings</div>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link href={`/admin/payment-method`} className="menu-link">
+              <i className="menu-icon tf-icons bx bxl-paypal"></i>
+              <div data-i18n="Email">Payment method</div>
+            </Link>
           </li>
         </ul>
       </aside>

@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Admin",
 };
+import { AdminProvider } from "@/context/AdminContext";
 import Script from "next/script";
 import Support from "../_components/Support";
 import Aside from "../_components/Aside";
@@ -22,22 +23,24 @@ export default function AdminLayout({
   return (
     <html lang="vi">
       <body>
-        <div className="layout-wrapper layout-content-navbar">
-          <div className="layout-container">
-            <Aside />
-            <div className="layout-page">
-              <Navbar />
-              <div className="content-wrapper">
-                <div className="container-xxl flex-grow-1 container-p-y">
-                  {children}
+        <AdminProvider>
+          <div className="layout-wrapper layout-content-navbar">
+            <div className="layout-container">
+              <Aside />
+              <div className="layout-page">
+                <Navbar />
+                <div className="content-wrapper">
+                  <div className="container-xxl flex-grow-1 container-p-y">
+                    {children}
+                  </div>
+                  <Footer />
+                  <div className="content-backdrop fade"></div>
                 </div>
-                <Footer />
-                <div className="content-backdrop fade"></div>
               </div>
             </div>
           </div>
-        </div>
-        <Support />
+          <Support />
+        </AdminProvider>
         <Script src="/assets/admin/js/helpers.js"></Script>
         <Script src="/assets/admin/js/config.js"></Script>
         <Script src="/assets/admin/js/jquery.js"></Script>
