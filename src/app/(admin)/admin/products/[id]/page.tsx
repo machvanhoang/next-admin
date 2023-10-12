@@ -3,7 +3,7 @@ export default function AdminProductDetail() {
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4 className="fw-bold">
-          <span className="text-muted fw-light">Admin/Products</span> Detail
+          <span className="text-muted fw-light">Admin / Products /</span> Detail
         </h4>
         <a href="" className="btn btn-primary">
           New product

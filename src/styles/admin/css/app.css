@@ -289,3 +289,9 @@
 .listTags {
     margin-top: 0.5rem;
 }
+
+.btn-custom {
+    color: #fff;
+    text-decoration: none;
+    line-height: 1;
+}

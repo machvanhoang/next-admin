@@ -4,10 +4,10 @@ export default function AdminProductCreate() {
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4 className="fw-bold">
-          <span className="text-muted fw-light">Admin/Product /</span> Create
+          <span className="text-muted fw-light">Admin / Product /</span> Create
         </h4>
         <Link href={`/admin/products`} className="btn btn-secondary">
-          Back
+          Go back
         </Link>
       </div>
       <form action="#" method="POST" role="form" id="formCreateProduct">

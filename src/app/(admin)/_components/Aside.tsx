@@ -50,6 +50,18 @@ export default function Aside() {
             </Link>
           </li>
           <li className="menu-item">
+            <Link href={`/admin/customers`} className="menu-link">
+              <i className="menu-icon tf-icons bx bx-envelope"></i>
+              <div data-i18n="Email">Customers</div>
+            </Link>
+          </li>
+          <li className="menu-item">
+            <Link href={`/admin/configs`} className="menu-link">
+              <i className="menu-icon tf-icons bx bx-envelope"></i>
+              <div data-i18n="Email">Configs</div>
+            </Link>
+          </li>
+          <li className="menu-item">
             <a
               href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
               target="_blank"

@@ -3,7 +3,7 @@ export default function Support() {
     <>
       <div className="buy-now">
         <a href="#" target="_blank" className="btn btn-danger btn-buy-now">
-          Support
+          Support 24/7
         </a>
       </div>
     </>
