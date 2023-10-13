@@ -16,7 +16,7 @@ export default function AdminProduct() {
             <h5 className="card-header">List of Product</h5>
             <div className="table-responsive text-nowrap">
               <table className="table">
-                <thead className="table-light">
+                <thead className="table">
                   <tr>
                     <th>#No</th>
                     <th>Name</th>
@@ -33,7 +33,7 @@ export default function AdminProduct() {
                   <tr>
                     <td>1</td>
                     <td>
-                      <a href="">
+                      <a className="strong-name" href="">
                         <strong>Product 01</strong>
                       </a>
                     </td>

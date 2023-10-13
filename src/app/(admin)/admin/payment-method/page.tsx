@@ -70,7 +70,7 @@ export default function PaymentMethod() {
             <h5 className="card-header">List of payment method</h5>
             <div className="table-responsive text-nowrap">
               <table className="table">
-                <thead className="table-light">
+                <thead className="table">
                   <tr>
                     <th>#No</th>
                     <th>Name</th>

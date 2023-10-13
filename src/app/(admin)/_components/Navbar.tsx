@@ -1,7 +1,13 @@
 "use client";
+import { useTheme } from "@/context/ThemeContext";
 export default function Navbar() {
+  const { toggleTheme } = useTheme();
   const stopEvent = (e: any) => {
     e.preventDefault();
+  };
+  const handleTheme = (e: any, type: "light" | "dark") => {
+    e.preventDefault();
+    toggleTheme(type);
   };
   return (
     <>
@@ -70,30 +76,34 @@ export default function Navbar() {
             <li className="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
               <a
                 className="nav-link dropdown-toggle hide-arrow"
-                href=""
+                href="#"
+                onClick={stopEvent}
                 data-bs-toggle="dropdown"
               >
                 <i className="bx bx-sm bx-sun"></i>
               </a>
               <ul className="dropdown-menu dropdown-menu-end dropdown-styles">
                 <li>
-                  <a className="dropdown-item" href="" data-theme="light">
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={(e) => handleTheme(e, "light")}
+                    data-theme="light"
+                  >
                     <span className="align-middle">
                       <i className="bx bx-sun me-2"></i>Light
                     </span>
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="" data-theme="dark">
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={(e) => handleTheme(e, "dark")}
+                    data-theme="dark"
+                  >
                     <span className="align-middle">
                       <i className="bx bx-moon me-2"></i>Dark
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="" data-theme="system">
-                    <span className="align-middle">
-                      <i className="bx bx-desktop me-2"></i>System
                     </span>
                   </a>
                 </li>
@@ -151,16 +161,10 @@ export default function Navbar() {
                           <small className="text-muted">1h ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>
@@ -181,16 +185,10 @@ export default function Navbar() {
                           <small className="text-muted">12hr ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>
@@ -215,16 +213,10 @@ export default function Navbar() {
                           <small className="text-muted">1h ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>
@@ -247,16 +239,10 @@ export default function Navbar() {
                           <small className="text-muted">1 day ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>
@@ -283,16 +269,10 @@ export default function Navbar() {
                           <small className="text-muted">2 days ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>
@@ -315,16 +295,10 @@ export default function Navbar() {
                           <small className="text-muted">3 days ago</small>
                         </div>
                         <div className="flex-shrink-0 dropdown-notifications-actions">
-                          <a
-                            href=""
-                            className="dropdown-notifications-read"
-                          >
+                          <a href="" className="dropdown-notifications-read">
                             <span className="badge badge-dot"></span>
                           </a>
-                          <a
-                            href=""
-                            className="dropdown-notifications-archive"
-                          >
+                          <a href="" className="dropdown-notifications-archive">
                             <span className="bx bx-x"></span>
                           </a>
                         </div>

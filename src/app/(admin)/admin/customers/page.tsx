@@ -12,7 +12,7 @@ export default function AdminCustomers() {
                         <h5 className="card-header">List of Customer</h5>
                         <div className="table-responsive text-nowrap">
                             <table className="table">
-                                <thead className="table-light">
+                                <thead className="table">
                                     <tr>
                                         <th>#No</th>
                                         <th>Name</th>
@@ -31,7 +31,7 @@ export default function AdminCustomers() {
                                             1
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.customer.edit', $customer) }}">
+                                            <a className="strong-name" href="{{ route('admin.customer.edit', $customer) }}">
                                                 <strong>David Mach</strong>
                                             </a>
                                         </td>
