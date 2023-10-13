@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SvgBack } from "@/AdminComponent/Svg";
 export default function AdminProductsVariantsCreate({
   params,
 }: {
@@ -16,8 +17,9 @@ export default function AdminProductsVariantsCreate({
         </h4>
         <Link
           href={`/admin/products/${productId}/variants`}
-          className="btn btn-secondary"
+          className="btn btn-secondary btn-add-back"
         >
+          <SvgBack />
           Go back variants
         </Link>
       </div>

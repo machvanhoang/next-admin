@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SvgBack } from "@/AdminComponent/Svg";
 export default async function AdminProductDetail({
   params,
 }: {
@@ -11,7 +12,8 @@ export default async function AdminProductDetail({
         <h4 className="fw-bold">
           <span className="text-muted fw-light">Admin / Products /</span> Detail
         </h4>
-        <Link href={`/admin/products`} className="btn btn-secondary">
+        <Link href={`/admin/products`} className="btn btn-secondary btn btn-add-back">
+          <SvgBack />
           Go back
         </Link>
       </div>

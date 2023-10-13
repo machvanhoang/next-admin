@@ -378,3 +378,14 @@
 #theme-dark .strong-name {
     color: #a3a4cc !important;
 }
+
+.btn-add-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.btn-add-back svg {
+    margin-right: 5px;
+}
