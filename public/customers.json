@@ -1,0 +1,68 @@
+[
+  {
+    "status_id": 1,
+    "full_name": "Customer 01",
+    "phone": "09181231231",
+    "email": "email01@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer01",
+    "verify_code": null,
+    "password": "password"
+  },
+  {
+    "status_id": 2,
+    "full_name": "Customer 02",
+    "phone": "09181231231",
+    "email": "email02@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer02",
+    "verify_code": null,
+    "password": "password"
+  },
+  {
+    "status_id": 3,
+    "full_name": "Customer 03",
+    "phone": "09181231231",
+    "email": "email01@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer03",
+    "verify_code": null,
+    "password": "password"
+  },
+  {
+    "status_id": 1,
+    "full_name": "Customer 04",
+    "phone": "09181231231",
+    "email": "email041@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer04",
+    "verify_code": null,
+    "password": "password"
+  },
+  {
+    "status_id": 1,
+    "full_name": "Customer 05",
+    "phone": "09181231231",
+    "email": "email05@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer05",
+    "verify_code": null,
+    "password": "password"
+  },
+  {
+    "status_id": 6,
+    "full_name": "Customer 06",
+    "phone": "09181231231",
+    "email": "email06@Gmail.com",
+    "address": "72 Văn Cao, Phu Tho Hoa, Tan Phu, TP HCM",
+    "media_id": null,
+    "username": "customer06",
+    "verify_code": null,
+    "password": "password"
+  }
+]
