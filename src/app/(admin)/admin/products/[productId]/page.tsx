@@ -1,13 +1,19 @@
-export default function AdminProductDetail() {
+import Link from "next/link";
+export default async function AdminProductDetail({
+  params,
+}: {
+  params: { productId: number };
+}) {
+  const { productId } = params;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4 className="fw-bold">
           <span className="text-muted fw-light">Admin / Products /</span> Detail
         </h4>
-        <a href="" className="btn btn-primary">
-          New product
-        </a>
+        <Link href={`/admin/products`} className="btn btn-secondary">
+          Go back
+        </Link>
       </div>
       <form action="#" method="POST" role="form" id="formUpdateProduct">
         <div className="row">
@@ -25,7 +31,7 @@ export default function AdminProductDetail() {
                     type="text"
                     className="form-control"
                     name="name"
-                    value=""
+                    defaultValue=""
                     id="name"
                     placeholder=""
                   />
@@ -77,7 +83,7 @@ export default function AdminProductDetail() {
                       type="text"
                       className="form-control"
                       name="regular_price"
-                      value=""
+                      defaultValue=""
                       id="regular_price"
                       placeholder=""
                     />
@@ -91,7 +97,7 @@ export default function AdminProductDetail() {
                       type="text"
                       className="form-control"
                       name="sale_price"
-                      value=""
+                      defaultValue=""
                       id="regular_price"
                       placeholder=""
                     />
@@ -114,7 +120,7 @@ export default function AdminProductDetail() {
                       type="text"
                       className="form-control"
                       name="sku"
-                      value=""
+                      defaultValue=""
                       id="sku"
                       placeholder=""
                     />
@@ -128,7 +134,7 @@ export default function AdminProductDetail() {
                       type="text"
                       className="form-control"
                       name="inventory"
-                      value=""
+                      defaultValue=""
                       id="inventory"
                       placeholder=""
                     />
@@ -144,9 +150,12 @@ export default function AdminProductDetail() {
               <div className="card-body mt-3">
                 <div className="row">
                   <div className="col-md-12">
-                    <a href="" className="btn btn-warning mt-1">
+                    <Link
+                      href={`/admin/products/${productId}/variants`}
+                      className="btn btn-warning mt-1"
+                    >
                       Setting variants
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -164,7 +173,7 @@ export default function AdminProductDetail() {
                     type="text"
                     className="form-control"
                     name="seo_title"
-                    value=""
+                    defaultValue=""
                     id="seo_title"
                     placeholder=""
                   />
@@ -178,7 +187,7 @@ export default function AdminProductDetail() {
                     type="text"
                     className="form-control"
                     name="seo_keyword"
-                    value=""
+                    defaultValue=""
                     id="seo_keyword"
                     placeholder=""
                   />
@@ -211,7 +220,7 @@ export default function AdminProductDetail() {
               <div className="card-body">
                 <div className="mt-0">
                   <select className="form-select" name="status" id="status">
-                    <option value="">Choice status</option>
+                    <option defaultValue="">Choice status</option>
                     <option>Published</option>
                     <option>Privated</option>
                   </select>
@@ -229,7 +238,7 @@ export default function AdminProductDetail() {
                     type="text"
                     className="form-control"
                     name="slug"
-                    value=""
+                    defaultValue=""
                     id="slug"
                     placeholder=""
                   />
@@ -250,7 +259,7 @@ export default function AdminProductDetail() {
                     type="text"
                     className="form-control @error('category')is-invalid @enderror"
                     name="category"
-                    value=""
+                    defaultValue=""
                     id="category"
                     placeholder=""
                   />
@@ -262,7 +271,7 @@ export default function AdminProductDetail() {
                   <input
                     type="text"
                     className="form-control"
-                    value=""
+                    defaultValue=""
                     id="type"
                     placeholder=""
                     readOnly
@@ -275,7 +284,7 @@ export default function AdminProductDetail() {
                   <input
                     type="text"
                     className="form-control"
-                    value=""
+                    defaultValue=""
                     id="user_id"
                     placeholder=""
                     readOnly
@@ -341,7 +350,7 @@ export default function AdminProductDetail() {
                       htmlFor="file-zone"
                     >
                       <input type="file" name="file" id="file-zone" />
-                      <input type="hidden" name="media_id" value="" />
+                      <input type="hidden" name="media_id" defaultValue="" />
                       <i className="fas fa-cloud-upload-alt"></i>
                       <p className="photoUpload-drop">
                         Kéo và thả hình vào đây
@@ -371,7 +380,7 @@ export default function AdminProductDetail() {
                       id="deleteMediaItem__{{ $item->media->id }}"
                     >
                       <img src="" alt="" />
-                      <input type="hidden" name="media[]" value="" />
+                      <input type="hidden" name="media[]" defaultValue="" />
                       <button
                         type="button"
                         className="deleteMediaItem"

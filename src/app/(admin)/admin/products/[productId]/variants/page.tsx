@@ -1,101 +1,70 @@
-export default function PaymentMethod() {
+import Link from "next/link";
+import Paginate from "@/AdminComponent/Paginate";
+export default function AdminProductVariants({
+  params,
+}: {
+  params: { productId: number };
+}) {
+  const { productId } = params;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4 className="fw-bold">
-          <span className="text-muted fw-light">Admin / </span> Payment method
+          <span className="text-muted fw-light">Admin / Products /</span>{" "}
+          Variants
         </h4>
-        <a href="" className="btn btn-secondary">
-          Back
-        </a>
+        <Link
+          href={`/admin/products/${productId}`}
+          className="btn btn-secondary"
+        >
+          Go back product
+        </Link>
       </div>
       <div className="row mb-4">
-        <div className="col-md-12 mb-4">
-          <form action="" role="form" id="formSubmit" method="POST">
-            <div className="card mb-4">
-              <hr className="my-0" />
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="mb-3">
-                      <label htmlFor="name" className="form-label">
-                        Name
-                      </label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder=""
-                        autoFocus={true}
-                        defaultValue=""
-                      />
-                      <div className="admin_error_field_message w-100">
-                        <p className="text-danger m-0">Name</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="mb-3">
-                      <label htmlFor="description" className="form-label">
-                        Description
-                      </label>
-                      <textarea
-                        className="form-control"
-                        name="description"
-                        id="description"
-                        cols={30}
-                        rows={8}
-                      ></textarea>
-                      <div className="admin_error_field_message w-100">
-                        <p className="text-danger m-0">Feedback</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <button type="submit" className="btn btn-primary me-2">
-                    Save
-                  </button>
-                  <button type="reset" className="btn btn-outline-secondary">
-                    Reset
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
         <div className="col-md-12">
           <div className="card">
-            <h5 className="card-header">List of payment method</h5>
+            <h5 className="card-header">List of Variants</h5>
             <div className="table-responsive text-nowrap">
               <table className="table">
                 <thead className="table">
                   <tr>
                     <th>#No</th>
                     <th>Name</th>
+                    <th>Regular price</th>
+                    <th>Sale price</th>
+                    <th>Inventory</th>
                     <th>Created at</th>
                     <th>Updated_at</th>
-                    <th>
-                      <div className="d-flex justify-content-center align-items-center">
-                        Actions
-                      </div>
-                    </th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody className="table-border-bottom-0">
                   <tr>
                     <td>1</td>
                     <td>
-                      <a href="">
-                        <strong>COD</strong>
+                      <a className="strong-name" href="">
+                        <strong>Product 01</strong>
                       </a>
                     </td>
-                    <td>2023-10-10 10:00</td>
-                    <td>2023-10-10 10:00</td>
                     <td>
-                      <div className="d-flex justify-content-center align-items-center">
-                        <a className="btn btn-secondary btn-custom" href="">
+                      1.000.000<sup>đ</sup>
+                    </td>
+                    <td>
+                      1.000.000<sup>đ</sup>
+                    </td>
+                    <td>1.000</td>
+                    <td>2023-10-10 10h20</td>
+                    <td>2023-10-10 10h20</td>
+                    <td>
+                      <span className="badge badge-published">Published</span>
+                    </td>
+                    <td>
+                      <div className="dropdown">
+                        <Link
+                          className="btn btn-secondary btn-custom"
+                          href={`/admin/products/${productId}/variants/5`}
+                        >
                           <span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -112,8 +81,8 @@ export default function PaymentMethod() {
                               />
                             </svg>
                           </span>
-                        </a>
-                        <button className="btn btn-danger btn-custom btnDelete ms-1">
+                        </Link>
+                        <button className="btn btn-danger btn-custom ms-2 btnDelete">
                           <span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -133,6 +102,9 @@ export default function PaymentMethod() {
                 </tbody>
               </table>
             </div>
+          </div>
+          <div className="d-flex justify-content-center mt-3">
+            <Paginate />
           </div>
         </div>
       </div>

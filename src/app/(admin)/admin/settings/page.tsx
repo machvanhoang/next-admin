@@ -22,7 +22,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="title"
-                    value=""
+                    defaultValue=""
                     id="title"
                     placeholder=""
                   />
@@ -43,7 +43,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="address"
-                    value=""
+                    defaultValue=""
                     id="address"
                     placeholder=""
                   />
@@ -57,7 +57,7 @@ export default function AdminSettings() {
                     type="email"
                     className="form-control is-invalid"
                     name="email"
-                    value=""
+                    defaultValue=""
                     id="email"
                     placeholder=""
                   />
@@ -71,7 +71,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="hotline"
-                    value=""
+                    defaultValue=""
                     id="hotline"
                     placeholder=""
                   />
@@ -85,7 +85,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="phone"
-                    value=""
+                    defaultValue=""
                     id="hotline"
                     placeholder=""
                   />
@@ -99,7 +99,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="zalo"
-                    value=""
+                    defaultValue=""
                     id="hotline"
                     placeholder=""
                   />
@@ -113,7 +113,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="website"
-                    value=""
+                    defaultValue=""
                     id="website"
                     placeholder=""
                   />
@@ -127,7 +127,7 @@ export default function AdminSettings() {
                     type="text"
                     className="form-control is-invalid"
                     name="fanpage"
-                    value=""
+                    defaultValue=""
                     id="fanpage"
                     placeholder=""
                   />

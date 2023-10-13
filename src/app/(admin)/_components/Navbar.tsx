@@ -38,40 +38,10 @@ export default function Navbar() {
           </div>
 
           <ul className="navbar-nav flex-row align-items-center ms-auto">
-            <li className="nav-item dropdown-language dropdown me-2 me-xl-0">
-              <a
-                className="nav-link dropdown-toggle hide-arrow"
-                href=""
-                data-bs-toggle="dropdown"
-              >
+            <li className="nav-item me-2 me-xl-0">
+              <a className="nav-link" target="blank" href="/">
                 <i className="bx bx-globe bx-sm"></i>
               </a>
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a
-                    className="dropdown-item active"
-                    href=""
-                    data-language="en"
-                  >
-                    <span className="align-middle">English</span>
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="" data-language="fr">
-                    <span className="align-middle">French</span>
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="" data-language="de">
-                    <span className="align-middle">German</span>
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="" data-language="pt">
-                    <span className="align-middle">Portuguese</span>
-                  </a>
-                </li>
-              </ul>
             </li>
             <li className="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
               <a

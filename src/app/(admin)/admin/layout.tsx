@@ -6,13 +6,14 @@ import "@/styles/admin/css/app.css";
 import "@/styles/admin/css/perfect-scrollbar.css";
 import "@/styles/admin/css/apex-charts.css";
 import type { Metadata } from "next";
+import { AdminProvider } from "@/context/AdminContext";
+import { ThemeProvider } from "@/context/ThemeContext";
+import NextTopLoader from "nextjs-toploader";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "Admin",
 };
-import { AdminProvider } from "@/context/AdminContext";
-import { ThemeProvider } from "@/context/ThemeContext";
-import Script from "next/script";
-
 export default function AdminLayout({
   children,
 }: {
@@ -21,6 +22,7 @@ export default function AdminLayout({
   return (
     <html lang="vi">
       <body>
+        <NextTopLoader color="#f0bc74" />
         <AdminProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </AdminProvider>

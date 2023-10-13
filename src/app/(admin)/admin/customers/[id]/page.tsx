@@ -16,7 +16,7 @@ export default function AdminCustomersDetail() {
                                 <div className="mb-3">
                                     <label htmlFor="full_name" className="form-label">Fullname</label>
                                     <input type="text" className="form-control is-invalid"
-                                        name="full_name" value="" id="full_name"
+                                        name="full_name" defaultValue="" id="full_name"
                                         placeholder="David Mach" />
                                     <div className="invalid-feedback">
                                         Feedback
@@ -27,7 +27,7 @@ export default function AdminCustomersDetail() {
                                         <div className="mb-3">
                                             <label htmlFor="phone" className="form-label">Phone</label>
                                             <input type="text" className="form-control is-invalid"
-                                                name="phone" value="" id="phone"
+                                                name="phone" defaultValue="" id="phone"
                                                 placeholder="" />
                                             <div className="invalid-feedback">
                                                 Feedback
@@ -38,7 +38,7 @@ export default function AdminCustomersDetail() {
                                         <div className="mb-3">
                                             <label htmlFor="email" className="form-label">Email address</label>
                                             <input type="email" className="form-control is-invalid"
-                                                name="email" value="" id="email"
+                                                name="email" defaultValue="" id="email"
                                                 placeholder="name@example.com" />
                                             <div className="invalid-feedback">
                                                 Feedback
@@ -50,7 +50,7 @@ export default function AdminCustomersDetail() {
                                     <label htmlFor="username" className="form-label">Username</label>
                                     <input className="form-control is-invalid" type="text"
                                         name="username" id="username" placeholder="Username"
-                                        value="" />
+                                        defaultValue="" />
                                     <div className="invalid-feedback">
                                         Feedback
                                     </div>
@@ -59,7 +59,7 @@ export default function AdminCustomersDetail() {
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">Password</label>
                                     <input type="password" className="form-control is-invalid"
-                                        name="password" value="" id="password" placeholder="******" />
+                                        name="password" defaultValue="" id="password" placeholder="******" />
                                     <div className="invalid-feedback">
                                         Feedback
                                     </div>
@@ -67,7 +67,7 @@ export default function AdminCustomersDetail() {
                                 <div className="mb-3">
                                     <label htmlFor="new_password" className="form-label">New password</label>
                                     <input type="password" className="form-control is-invalid"
-                                        name="new_password" value="" id="new_password"
+                                        name="new_password" defaultValue="" id="new_password"
                                         placeholder="******" />
                                     <div className="invalid-feedback">
                                         Feedback
@@ -76,7 +76,7 @@ export default function AdminCustomersDetail() {
                                 <div className="mb-3">
                                     <label htmlFor="new_confirm_password" className="form-label">New confirm password</label>
                                     <input type="password" className="form-control is-invalid"
-                                        name="new_confirm_password" value=""
+                                        name="new_confirm_password" defaultValue=""
                                         id="new_confirm_password" placeholder="******" />
                                     <div className="invalid-feedback">
                                         Feedback
@@ -86,7 +86,7 @@ export default function AdminCustomersDetail() {
                                     <label htmlFor="customer_status_id" className="form-label">Status</label>
                                     <select className="form-select is-invalid"
                                         name="customer_status_id" id="customer_status_id">
-                                        <option value="">Choice status</option>
+                                        <option defaultValue="">Choice status</option>
                                         <option value="1">Published</option>
                                     </select>
                                     <div className="invalid-feedback">

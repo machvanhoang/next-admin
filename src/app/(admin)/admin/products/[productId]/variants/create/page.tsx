@@ -1,13 +1,24 @@
 import Link from "next/link";
-export default function AdminProductCreate() {
+export default function AdminProductsVariantsCreate({
+  params,
+}: {
+  params: { productId: number };
+}) {
+  const { productId } = params;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4 className="fw-bold">
-          <span className="text-muted fw-light">Admin / Product /</span> Create
+          <span className="text-muted fw-light">
+            Admin / Product / Variants /
+          </span>{" "}
+          Detail
         </h4>
-        <Link href={`/admin/products`} className="btn btn-secondary">
-          Go back
+        <Link
+          href={`/admin/products/${productId}/variants`}
+          className="btn btn-secondary"
+        >
+          Go back variants
         </Link>
       </div>
       <form action="#" method="POST" role="form" id="formCreateProduct">
@@ -16,7 +27,7 @@ export default function AdminProductCreate() {
           <div className="col-md-8">
             <div className="card mb-4">
               <div className="card-header custom border-bottom">
-                <h4>Product detail</h4>
+                <h4>Variants detail</h4>
               </div>
               <div className="card-body">
                 <div className="mt-3 mb-3">
@@ -32,22 +43,6 @@ export default function AdminProductCreate() {
                     placeholder=""
                   />
                   <div className="invalid-feedback feedback_name"></div>
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="description"
-                    className="form-label font-small"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    className="form-control"
-                    id="description"
-                    cols={30}
-                    rows={7}
-                  ></textarea>
-                  <div className="invalid-feedback feedback_description"></div>
                 </div>
               </div>
             </div>
@@ -125,77 +120,11 @@ export default function AdminProductCreate() {
                 </div>
               </div>
             </div>
-            <div className="card mb-4">
-              <div className="card-header custom border-bottom">
-                <h4>Seo</h4>
-              </div>
-              <div className="card-body">
-                <div className="mt-3 mb-3">
-                  <label htmlFor="seo_title" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="seo_title"
-                    defaultValue=""
-                    id="seo_title"
-                    placeholder=""
-                  />
-                  <div className="invalid-feedback feedback_seo_title"></div>
-                </div>
-                <div className="mt-3 mb-3">
-                  <label htmlFor="seo_keyword" className="form-label">
-                    Keyword
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="seo_keyword"
-                    defaultValue=""
-                    id="keyword"
-                    placeholder=""
-                  />
-                  <div className="invalid-feedback feedback_seo_keyword"></div>
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="seo_description"
-                    className="form-label font-small"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    name="seo_description"
-                    className="form-control"
-                    id="seo_description"
-                    cols={30}
-                    rows={7}
-                  ></textarea>
-                  <div className="invalid-feedback feedback_seo_description"></div>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="col-md-4">
             <div className="card mb-4">
-              <div className="card-header custom">
-                <h4>Status</h4>
-              </div>
-              <div className="card-body">
-                <div className="mt-0">
-                  <select className="form-select" name="status" id="status">
-                    <option defaultValue="">Choice status</option>
-                    <option>Published</option>
-                    <option>Privated</option>
-                  </select>
-                  <div className="invalid-feedback feedback_status"></div>
-                </div>
-              </div>
-            </div>
-            <div className="card mb-4">
               <div className="card-header custom border-bottom">
-                <h4>Product organization</h4>
+                <h4>Product detail</h4>
               </div>
               <div className="card-body">
                 <div className="mt-3">
@@ -207,6 +136,19 @@ export default function AdminProductCreate() {
                     className="form-control"
                     defaultValue=""
                     id="type"
+                    placeholder=""
+                    readOnly
+                  />
+                </div>
+                <div className="mt-3">
+                  <label htmlFor="user_id" className="form-label font-small">
+                    Status
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    defaultValue=""
+                    id="user_id"
                     placeholder=""
                     readOnly
                   />
@@ -235,7 +177,7 @@ export default function AdminProductCreate() {
                     type="button"
                     className="btn btn-primary btnSaveProduct"
                   >
-                    Create
+                    Update
                   </button>
                   <button type="reset" className="btn btn-secondary ms-3">
                     Reset

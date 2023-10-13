@@ -1,7 +1,7 @@
 export default function AdminPosts() {
-    return (
-        <>
-
-        </>
-    )
+  return (
+    <>
+      <h1>Go to post page</h1>
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Paginate from "@/AdminComponent/Paginate";
 export default function AdminOrders() {
   return (
     <>
@@ -91,7 +92,7 @@ export default function AdminOrders() {
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <h2>Paginate</h2>
+            <Paginate />
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
-import Support from "../_components/Support";
-import Aside from "../_components/Aside";
-import Navbar from "../_components/Navbar";
-import Footer from "../_components/Footer";
+import Support from "@/AdminComponent/Support";
+import Aside from "@/AdminComponent/Aside";
+import Navbar from "@/AdminComponent/Navbar";
+import Footer from "@/AdminComponent/Footer";
 export default function AdminTemplate({
   children,
 }: {
@@ -12,7 +12,10 @@ export default function AdminTemplate({
   const { theme } = useTheme();
   return (
     <>
-      <div className="layout-wrapper layout-content-navbar" id={`theme-${theme}`}>
+      <div
+        className="layout-wrapper layout-content-navbar"
+        id={`theme-${theme}`}
+      >
         <div className="layout-container">
           <Aside />
           <div className="layout-page">

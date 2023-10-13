@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Paginate from "@/AdminComponent/Paginate";
 export default function AdminProduct() {
   return (
     <>
@@ -23,6 +24,7 @@ export default function AdminProduct() {
                     <th>Regular price</th>
                     <th>Sale price</th>
                     <th>Inventory</th>
+                    <th>Variants</th>
                     <th>Created at</th>
                     <th>Updated_at</th>
                     <th>Status</th>
@@ -44,6 +46,14 @@ export default function AdminProduct() {
                       1.000.000<sup>đ</sup>
                     </td>
                     <td>1.000</td>
+                    <td>
+                      <Link
+                        href={`/admin/products/5/variants`}
+                        className="btn btn-custom btn-warning"
+                      >
+                        <small>Variants</small>
+                      </Link>
+                    </td>
                     <td>2023-10-10 10h20</td>
                     <td>2023-10-10 10h20</td>
                     <td>
@@ -51,7 +61,10 @@ export default function AdminProduct() {
                     </td>
                     <td>
                       <div className="dropdown">
-                        <a className="btn btn-secondary btn-custom" href="">
+                        <a
+                          className="btn btn-secondary btn-custom"
+                          href="/admin/products/edit"
+                        >
                           <span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +82,7 @@ export default function AdminProduct() {
                             </svg>
                           </span>
                         </a>
-                        <button
-                          className="btn btn-danger btn-custom ms-2 btnDelete"
-                        >
+                        <button className="btn btn-danger btn-custom ms-2 btnDelete">
                           <span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +104,7 @@ export default function AdminProduct() {
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <h2>Paginate</h2>
+            <Paginate />
           </div>
         </div>
       </div>
