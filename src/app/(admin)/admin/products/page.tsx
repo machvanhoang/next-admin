@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Paginate from "@/AdminComponent/Paginate";
 import { formatPrice } from "@/helpers";
-import { fetchAdmin } from "@/lib/fetch";
 import { SvgPlus, SvgEdit, SvgTrash } from "@/AdminComponent/Svg";
-async function getProducts() {
-  const res = await fetchAdmin("http://localhost:3000/products.json");
-  return await res.json();
-}
-export default async function AdminProduct() {
-  const products = await getProducts();
+import { getProducts } from "@/services/ProductServices"
+import { notFound } from "next/navigation";
+export default async function AdminProduct({ searchParams }: { searchParams: { page: number } }) {
+  const { page } = searchParams;
+  const { success, products } = await getProducts(page);
+  if (!success) {
+    return notFound();
+  }
+  const { prev_page_url, next_page_url, last_page, data, current_page } = products;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
@@ -38,22 +40,22 @@ export default async function AdminProduct() {
                     <th>Inventory</th>
                     <th>Variants</th>
                     <th>Created at</th>
-                    <th>Updated_at</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody className="table-border-bottom-0">
-                  {products &&
-                    products.length &&
-                    products.map((product: any, key: number) => {
+                  {data &&
+                    data.length > 0 &&
+                    data.map((product: any) => {
+                      const productId = product.id;
                       return (
-                        <tr key={key}>
-                          <td>1</td>
+                        <tr key={productId}>
+                          <td>{productId}</td>
                           <td>
                             <Link
                               className="strong-name"
-                              href={`/admin/products/${key}`}
+                              href={`/admin/products/${productId}`}
                             >
                               <strong>{product.name}</strong>
                             </Link>
@@ -69,24 +71,23 @@ export default async function AdminProduct() {
                           <td>{formatPrice(product.inventory)}</td>
                           <td>
                             <Link
-                              href={`/admin/products/${key}/variants`}
+                              href={`/admin/products/${productId}/variants`}
                               className="btn btn-custom btn-warning"
                             >
                               <small>Variants</small>
                             </Link>
                           </td>
-                          <td>2023-10-10 10h20</td>
-                          <td>2023-10-10 10h20</td>
+                          <td>{product.created_at}</td>
                           <td>
-                            <span className="badge badge-published">
-                              Published
+                            <span className={`badge badge-published ${product.status}`}>
+                              {product.status}
                             </span>
                           </td>
                           <td>
                             <div className="dropdown">
                               <Link
                                 className="btn btn-secondary btn-custom"
-                                href={`/admin/products/${key}`}
+                                href={`/admin/products/${productId}`}
                               >
                                 <span>
                                   <SvgEdit />
@@ -107,7 +108,7 @@ export default async function AdminProduct() {
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <Paginate />
+            <Paginate prev_page_url={prev_page_url} next_page_url={next_page_url} current_page={current_page} last_page={last_page} />
           </div>
         </div>
       </div>

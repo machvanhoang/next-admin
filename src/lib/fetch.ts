@@ -1,6 +1,7 @@
 export const fetchAdmin = async (url: string, options?: RequestInit): Promise<Response> => {
     try {
-        const response = await fetch(url, options);
+        const api = `${process.env.NEXT_PUBLIC_API}/admin/${url}`;
+        const response = await fetch(api, options);
         if (!response.ok) {
             throw new Error(`Request failed with status: ${response.status}`);
         }

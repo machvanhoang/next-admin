@@ -389,3 +389,8 @@
 .btn-add-back svg {
     margin-right: 5px;
 }
+
+[disabled],
+.disabled {
+    cursor: no-drop !important;
+}
