@@ -1,12 +1,15 @@
 import Link from "next/link";
-import Paginate from "@/AdminComponent/Paginate";
 import { SvgEdit, SvgTrash, SvgBack } from "@/AdminComponent/Svg";
-export default function AdminProductVariants({
+import { getProductVariants } from "@/services/ProductServices";
+import { formatPrice } from "@/helpers";
+import VariantCreate from "@/AdminComponent/Products/VariantCreate";
+export default async function AdminProductVariants({
   params,
 }: {
   params: { productId: number };
 }) {
   const { productId } = params;
+  const { variants } = await getProductVariants(productId);
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
@@ -21,6 +24,11 @@ export default function AdminProductVariants({
           <SvgBack />
           Go back product
         </Link>
+      </div>
+      <div className="row mb-4">
+        <div className="col-md-12">
+          <VariantCreate />
+        </div>
       </div>
       <div className="row mb-4">
         <div className="col-md-12">
@@ -42,49 +50,50 @@ export default function AdminProductVariants({
                   </tr>
                 </thead>
                 <tbody className="table-border-bottom-0">
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <a className="strong-name" href="">
-                        <strong>Product 01</strong>
-                      </a>
-                    </td>
-                    <td>
-                      1.000.000<sup>đ</sup>
-                    </td>
-                    <td>
-                      1.000.000<sup>đ</sup>
-                    </td>
-                    <td>1.000</td>
-                    <td>2023-10-10 10h20</td>
-                    <td>2023-10-10 10h20</td>
-                    <td>
-                      <span className="badge badge-published">Published</span>
-                    </td>
-                    <td>
-                      <div className="dropdown">
-                        <Link
-                          className="btn btn-secondary btn-custom"
-                          href={`/admin/products/${productId}/variants/5`}
-                        >
-                          <span>
-                            <SvgEdit />
-                          </span>
-                        </Link>
-                        <button className="btn btn-danger btn-custom ms-2 btnDelete">
-                          <span>
-                            <SvgTrash />
-                          </span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  {
+                    variants && variants.length > 0 && variants.map((variant: any) => {
+                      return <tr key={variant.id}>
+                        <td>{variant.id}</td>
+                        <td>
+                          <a className="strong-name" href="">
+                            <strong>Product 01</strong>
+                          </a>
+                        </td>
+                        <td>
+                          {formatPrice(variant.regular_price)}<sup>đ</sup>
+                        </td>
+                        <td>
+                          {formatPrice(variant.sale_price)}<sup>đ</sup>
+                        </td>
+                        <td>{formatPrice(variant.inventory)}</td>
+                        <td>{variant.created_at}</td>
+                        <td>{variant.updated_at}</td>
+                        <td>
+                          <span className="badge badge-published">Published</span>
+                        </td>
+                        <td>
+                          <div className="dropdown">
+                            <Link
+                              className="btn btn-secondary btn-custom"
+                              href={`/admin/products/${productId}/variants/${variant.id}`}
+                            >
+                              <span>
+                                <SvgEdit />
+                              </span>
+                            </Link>
+                            <button className="btn btn-danger btn-custom ms-2 btnDelete">
+                              <span>
+                                <SvgTrash />
+                              </span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    })
+                  }
                 </tbody>
               </table>
             </div>
-          </div>
-          <div className="d-flex justify-content-center mt-3">
-            <Paginate />
           </div>
         </div>
       </div>

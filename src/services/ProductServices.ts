@@ -11,3 +11,9 @@ export const getProductDetail = async (productID: number) => {
     });
     return await res.json();
 }
+export const getProductVariants = async (productID: number) => {
+    const res = await fetchAdmin(`products/${productID}/variants`, {
+        cache: "no-cache"
+    });
+    return await res.json();
+}
