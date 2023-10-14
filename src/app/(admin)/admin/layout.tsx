@@ -5,12 +5,13 @@ import "@/styles/admin/css/demo.css";
 import "@/styles/admin/css/app.css";
 import "@/styles/admin/css/perfect-scrollbar.css";
 import "@/styles/admin/css/apex-charts.css";
+import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AdminProvider } from "@/context/AdminContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { ToastContainer, toast } from 'react-toastify';
 import NextTopLoader from "nextjs-toploader";
 import Script from "next/script";
-
 export const metadata: Metadata = {
   title: "Admin",
 };
@@ -23,6 +24,7 @@ export default function AdminLayout({
     <html lang="vi">
       <body>
         <NextTopLoader color="#f0bc74" />
+        <ToastContainer />
         <AdminProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </AdminProvider>

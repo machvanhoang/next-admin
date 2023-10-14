@@ -1,7 +1,83 @@
+"use client"
+import { useState } from "react"
 import Link from "next/link"
+import { toast } from 'react-toastify';
+import { fetchAdmin } from "@/lib/fetch";
+interface formDataValue {
+    name: string;
+    slug: string;
+    desc: string;
+    content: string;
+    regular_price: number;
+    sale_price: number;
+    sku: string;
+    inventory: number;
+    status: string;
+    type: string;
+    media_id: number | null;
+    seo_title: string;
+    seo_keyword: string;
+    seo_description: string;
+}
 export default function ProductEdit({ productId, product }: { productId: number, product: any }) {
+    const [isSubmit, setSubmit] = useState<boolean>(false);
+    const [formData, setFormData] = useState<formDataValue>({
+        name: product.name,
+        slug: product.slug,
+        desc: product.desc,
+        content: product.content,
+        regular_price: product.regular_price,
+        sale_price: product.sale_price,
+        sku: product.sku,
+        inventory: product.inventory,
+        status: product.status,
+        type: product.type,
+        media_id: product.media_id,
+        seo_title: product.seo?.title,
+        seo_keyword: product.seo?.keyword,
+        seo_description: product.seo?.description,
+    });
+    const handleFormData = (e: any) => {
+        e.preventDefault();
+        const newFormData = { ...formData, [e.target.name]: e.target.value };
+        setFormData(newFormData);
+    }
+    const isFormDisabled = () => {
+        return (
+            !formData.name ||
+            !formData.slug ||
+            !formData.desc ||
+            !formData.status ||
+            !formData.content ||
+            formData.regular_price <= 0 ||
+            formData.sale_price <= 0 ||
+            !formData.sku ||
+            formData.inventory <= 0 ||
+            !formData.seo_title ||
+            !formData.seo_keyword ||
+            !formData.seo_description
+        );
+    };
+    const updateProduct = async (e: any) => {
+        e.preventDefault();
+        setSubmit(true);
+        await fetchAdmin(`products/${productId}`, {
+            method: "PUT",
+            body: JSON.stringify(formData)
+        }).then((res) => res.json()).then((res) => {
+            const { success, message, product } = res;
+            if (!success) {
+                toast.error(message);
+            } else {
+                toast.success(message);
+            }
+        })
+            .finally(() => {
+                setSubmit(false);
+            });
+    }
     return (
-        <form action="#" method="POST" role="form" id="formUpdateProduct">
+        <form onSubmit={updateProduct} method="POST" role="form" id="formUpdateProduct">
             <div className="row">
                 <div className="col-md-8">
                     <div className="card mb-4">
@@ -17,10 +93,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     type="text"
                                     className="form-control"
                                     name="name"
-                                    value={product.name}
-                                    defaultValue=""
+                                    value={formData.name}
+                                    onChange={handleFormData}
+                                    disabled={isSubmit}
                                     id="name"
-                                    placeholder=""
                                 />
                                 <div className="invalid-feedback feedback_name"></div>
                             </div>
@@ -32,12 +108,14 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     Description
                                 </label>
                                 <textarea
-                                    name="description"
+                                    name="desc"
                                     className="form-control"
-                                    id="description"
+                                    id="desc"
                                     cols={30}
                                     rows={7}
-                                    value={product.desc}
+                                    onChange={handleFormData}
+                                    disabled={isSubmit}
+                                    value={formData.desc}
                                 ></textarea>
                                 <div className="invalid-feedback feedback_description"></div>
                             </div>
@@ -51,7 +129,9 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     id="content"
                                     cols={30}
                                     rows={12}
-                                    value={product.content}
+                                    onChange={handleFormData}
+                                    disabled={isSubmit}
+                                    value={formData.content}
                                 ></textarea>
                                 <div className="invalid-feedback feedback_content"></div>
                             </div>
@@ -73,8 +153,9 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         className="form-control"
                                         name="regular_price"
                                         id="regular_price"
-                                        value={product.regular_price}
-                                        placeholder=""
+                                        onChange={handleFormData}
+                                        disabled={isSubmit}
+                                        value={formData.regular_price}
                                     />
                                     <div className="invalid-feedback feedback_regular_price"></div>
                                 </div>
@@ -86,9 +167,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         type="text"
                                         className="form-control"
                                         name="sale_price"
-                                        value={product.sale_price}
+                                        value={formData.sale_price}
+                                        onChange={handleFormData}
+                                        disabled={isSubmit}
                                         id="regular_price"
-                                        placeholder=""
                                     />
                                     <div className="invalid-feedback feedback_sale_price"></div>
                                 </div>
@@ -109,9 +191,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         type="text"
                                         className="form-control"
                                         name="sku"
-                                        value={product.sku}
+                                        onChange={handleFormData}
+                                        disabled={isSubmit}
+                                        value={formData.sku}
                                         id="sku"
-                                        placeholder=""
                                     />
                                     <div className="invalid-feedback feedback_sku"></div>
                                 </div>
@@ -123,9 +206,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         type="text"
                                         className="form-control"
                                         name="inventory"
-                                        defaultValue={product.inventory}
+                                        onChange={handleFormData}
+                                        disabled={isSubmit}
+                                        value={formData.inventory}
                                         id="inventory"
-                                        placeholder=""
                                     />
                                     <div className="invalid-feedback feedback_inventory"></div>
                                 </div>
@@ -162,9 +246,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     type="text"
                                     className="form-control"
                                     name="seo_title"
-                                    defaultValue=""
+                                    onChange={handleFormData}
+                                    disabled={isSubmit}
+                                    value={formData.seo_title}
                                     id="seo_title"
-                                    placeholder=""
                                 />
                                 <div className="invalid-feedback feedback_seo_title"></div>
                             </div>
@@ -176,9 +261,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     type="text"
                                     className="form-control"
                                     name="seo_keyword"
-                                    defaultValue=""
+                                    onChange={handleFormData}
+                                    disabled={isSubmit}
+                                    value={formData.seo_keyword}
                                     id="seo_keyword"
-                                    placeholder=""
                                 />
                                 <div className="invalid-feedback feedback_seo_keyword"></div>
                             </div>
@@ -193,6 +279,9 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     name="seo_description"
                                     className="form-control"
                                     id="seo_description"
+                                    onChange={handleFormData}
+                                    value={formData.seo_description}
+                                    disabled={isSubmit}
                                     cols={30}
                                     rows={7}
                                 ></textarea>
@@ -208,7 +297,13 @@ export default function ProductEdit({ productId, product }: { productId: number,
                         </div>
                         <div className="card-body">
                             <div className="mt-0">
-                                <select className="form-select" name="status" id="status" value={product.status}>
+                                <select
+                                    className="form-select"
+                                    name="status"
+                                    id="status"
+                                    disabled={isSubmit}
+                                    onChange={handleFormData}
+                                    value={formData.status}>
                                     <option value={``}>Choice status</option>
                                     <option value={`published`}>Published</option>
                                     <option value={`privated`}>Privated</option>
@@ -227,9 +322,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     type="text"
                                     className="form-control"
                                     name="slug"
-                                    value={product.slug}
+                                    onChange={handleFormData}
+                                    value={formData.slug}
+                                    disabled={isSubmit}
                                     id="slug"
-                                    placeholder=""
                                 />
                                 <div className="invalid-feedback feedback_slug"></div>
                             </div>
@@ -246,11 +342,10 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                 </label>
                                 <input
                                     type="text"
-                                    className="form-control @error('category')is-invalid @enderror"
+                                    className="form-control is-invalid"
                                     name="category"
                                     defaultValue=""
                                     id="category"
-                                    placeholder=""
                                 />
                             </div>
                             <div className="mt-3">
@@ -260,22 +355,9 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                 <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue=""
+                                    defaultValue={formData.type}
+                                    disabled={isSubmit}
                                     id="type"
-                                    placeholder=""
-                                    readOnly
-                                />
-                            </div>
-                            <div className="mt-3">
-                                <label htmlFor="user_id" className="form-label font-small">
-                                    Vendor
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    defaultValue=""
-                                    id="user_id"
-                                    placeholder=""
                                     readOnly
                                 />
                             </div>
@@ -293,7 +375,6 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     className="form-control"
                                     name="tags"
                                     id="tags"
-                                    placeholder=""
                                 />
                                 <div className="invalid-feedback feedback_tag_name"></div>
                                 <div className="listTags">
@@ -425,13 +506,13 @@ export default function ProductEdit({ productId, product }: { productId: number,
                         <div className="card-footer">
                             <div className="d-flex justify-content-start">
                                 <button
-                                    type="button"
-                                    className="btn btn-primary btnUpdateProduct"
-                                    data-action=""
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    disabled={isFormDisabled()}
                                 >
-                                    Update
+                                    {isSubmit ? 'Updating' : 'Update'}
                                 </button>
-                                <button type="reset" className="btn btn-secondary ms-3">
+                                <button type="reset" disabled={isSubmit} className="btn btn-secondary ms-3">
                                     Reset
                                 </button>
                             </div>

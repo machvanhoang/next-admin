@@ -390,7 +390,9 @@
     margin-right: 5px;
 }
 
+button:disabled,
 [disabled],
 .disabled {
     cursor: no-drop !important;
+    pointer-events: initial !important;
 }
