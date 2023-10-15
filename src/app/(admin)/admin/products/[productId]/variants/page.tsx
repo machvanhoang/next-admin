@@ -27,7 +27,7 @@ export default async function AdminProductVariants({
       </div>
       <div className="row mb-4">
         <div className="col-md-12">
-          <VariantCreate />
+          <VariantCreate productId={productId} />
         </div>
       </div>
       <div className="row mb-4">
@@ -56,7 +56,7 @@ export default async function AdminProductVariants({
                         <td>{variant.id}</td>
                         <td>
                           <a className="strong-name" href="">
-                            <strong>Product 01</strong>
+                            <strong>{variant.name}</strong>
                           </a>
                         </td>
                         <td>

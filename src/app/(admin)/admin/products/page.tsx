@@ -10,7 +10,7 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
   if (!success) {
     return notFound();
   }
-  const { prev_page_url, next_page_url, last_page, data, current_page } = products;
+  const { links, data, meta } = products;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
@@ -40,6 +40,7 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
                     <th>Inventory</th>
                     <th>Variants</th>
                     <th>Created at</th>
+                    <th>Updated at</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
@@ -61,11 +62,11 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
                             </Link>
                           </td>
                           <td>
-                            {formatPrice(product.regular_price)}
+                            {formatPrice(product.regularPrice)}
                             <sup>đ</sup>
                           </td>
                           <td>
-                            {formatPrice(product.sale_price)}
+                            {formatPrice(product.salePrice)}
                             <sup>đ</sup>
                           </td>
                           <td>{formatPrice(product.inventory)}</td>
@@ -77,7 +78,8 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
                               <small>Variants</small>
                             </Link>
                           </td>
-                          <td>{product.created_at}</td>
+                          <td>{product.dateCreate}</td>
+                          <td>{product.dateUpdate}</td>
                           <td>
                             <span className={`badge badge-published ${product.status}`}>
                               {product.status}
@@ -108,7 +110,7 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <Paginate prev_page_url={prev_page_url} next_page_url={next_page_url} current_page={current_page} last_page={last_page} />
+            <Paginate links={links} current_page={meta.current_page} />
           </div>
         </div>
       </div>

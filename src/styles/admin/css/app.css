@@ -246,6 +246,8 @@
 
 .item-tag {
     display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 4px;
 }
 
 .item-tag__content {

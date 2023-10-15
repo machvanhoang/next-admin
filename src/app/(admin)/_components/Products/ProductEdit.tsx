@@ -1,41 +1,49 @@
 "use client"
-import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image";
+import { useState } from "react"
 import { toast } from 'react-toastify';
 import { fetchAdmin } from "@/lib/fetch";
+import { uploadMedia } from "@/services/MediaService";
 interface formDataValue {
+    photo: any,
     name: string;
     slug: string;
     desc: string;
     content: string;
-    regular_price: number;
-    sale_price: number;
+    regularPrice: number;
+    salePrice: number;
     sku: string;
     inventory: number;
     status: string;
     type: string;
-    media_id: number | null;
     seo_title: string;
     seo_keyword: string;
     seo_description: string;
+    variants: any;
+    tags: any;
+    gallery: any;
 }
 export default function ProductEdit({ productId, product }: { productId: number, product: any }) {
     const [isSubmit, setSubmit] = useState<boolean>(false);
     const [formData, setFormData] = useState<formDataValue>({
+        photo: product.photo,
         name: product.name,
         slug: product.slug,
         desc: product.desc,
         content: product.content,
-        regular_price: product.regular_price,
-        sale_price: product.sale_price,
+        regularPrice: product.regularPrice,
+        salePrice: product.salePrice,
         sku: product.sku,
         inventory: product.inventory,
         status: product.status,
         type: product.type,
-        media_id: product.media_id,
         seo_title: product.seo?.title,
         seo_keyword: product.seo?.keyword,
         seo_description: product.seo?.description,
+        variants: product.variants,
+        tags: product.tags,
+        gallery: product.gallery,
     });
     const handleFormData = (e: any) => {
         e.preventDefault();
@@ -49,8 +57,8 @@ export default function ProductEdit({ productId, product }: { productId: number,
             !formData.desc ||
             !formData.status ||
             !formData.content ||
-            formData.regular_price <= 0 ||
-            formData.sale_price <= 0 ||
+            formData.regularPrice <= 0 ||
+            formData.salePrice <= 0 ||
             !formData.sku ||
             formData.inventory <= 0 ||
             !formData.seo_title ||
@@ -65,7 +73,7 @@ export default function ProductEdit({ productId, product }: { productId: number,
             method: "PUT",
             body: JSON.stringify(formData)
         }).then((res) => res.json()).then((res) => {
-            const { success, message, product } = res;
+            const { success, message } = res;
             if (!success) {
                 toast.error(message);
             } else {
@@ -75,6 +83,12 @@ export default function ProductEdit({ productId, product }: { productId: number,
             .finally(() => {
                 setSubmit(false);
             });
+    }
+    const handlePhoto = async (e: any) => {
+        const file = e.target.files[0];
+        const { media } = await uploadMedia(file);
+        const newFormData = { ...formData, photo: media };
+        setFormData(newFormData);
     }
     return (
         <form onSubmit={updateProduct} method="POST" role="form" id="formUpdateProduct">
@@ -155,7 +169,7 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         id="regular_price"
                                         onChange={handleFormData}
                                         disabled={isSubmit}
-                                        value={formData.regular_price}
+                                        value={formData.regularPrice}
                                     />
                                     <div className="invalid-feedback feedback_regular_price"></div>
                                 </div>
@@ -167,7 +181,7 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         type="text"
                                         className="form-control"
                                         name="sale_price"
-                                        value={formData.sale_price}
+                                        value={formData.salePrice}
                                         onChange={handleFormData}
                                         disabled={isSubmit}
                                         id="regular_price"
@@ -218,20 +232,33 @@ export default function ProductEdit({ productId, product }: { productId: number,
                     </div>
                     <div className="card mb-4">
                         <div className="card-header custom border-bottom">
-                            <h4>Variants</h4>
-                        </div>
-                        <div className="card-body mt-3">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <Link
-                                        href={`/admin/products/${productId}/variants`}
-                                        className="btn btn-warning mt-1"
-                                    >
-                                        Setting variants
-                                    </Link>
-                                </div>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h4 className="m-0">Variants</h4>
+                                <Link
+                                    href={`/admin/products/${productId}/variants`}
+                                    className="btn btn-warning mt-1"
+                                >
+                                    Setting variants
+                                </Link>
                             </div>
                         </div>
+                        {formData.variants && formData.variants.length > 0 &&
+                            <div className="card-body mt-3">
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <ul className="m-0">
+                                            {formData.variants.map((variant: any) => {
+                                                return (
+                                                    <li key={variant.id}>
+                                                        {variant.name} - {variant.regularPrice} - {variant.salePrice}
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                     <div className="card mb-4">
                         <div className="card-header custom border-bottom">
@@ -377,27 +404,34 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                     id="tags"
                                 />
                                 <div className="invalid-feedback feedback_tag_name"></div>
-                                <div className="listTags">
-                                    <div className="item-tag">
-                                        <div className="d-flex justify-content-start align-items-center item-tag__content">
-                                            <span>Tag 1</span>
-                                            <button className="btnRemoveTags" type="button">
-                                                <span className="svg">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="16"
-                                                        fill="currentColor"
-                                                        className="bi bi-x"
-                                                        viewBox="0 0 16 16"
-                                                    >
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
+                                {formData.tags && formData.tags.length > 0 &&
+                                    <div className="listTags">
+                                        {formData.tags.map((tag: any) => {
+                                            return (
+                                                <div className="item-tag" key={tag.id}>
+                                                    <div className="d-flex justify-content-start align-items-center item-tag__content">
+                                                        <span>{tag.name}</span>
+                                                        <button className="btnRemoveTags" type="button">
+                                                            <span className="svg">
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16"
+                                                                    height="16"
+                                                                    fill="currentColor"
+                                                                    className="bi bi-x"
+                                                                    viewBox="0 0 16 16"
+                                                                >
+                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -412,74 +446,20 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         className="photoUpload-detail"
                                         id="photoUpload-preview"
                                     >
-                                        <img className="rounded" src="" alt="Alt Photo" />
+                                        <Image
+                                            src={formData?.photo.path}
+                                            alt="Image"
+                                            width={formData?.photo.width}
+                                            height={formData?.photo.height}
+                                        />
                                     </div>
                                     <label
                                         className="photoUpload-file"
                                         id="photo-zone"
                                         htmlFor="file-zone"
                                     >
-                                        <input type="file" name="file" id="file-zone" />
-                                        <input type="hidden" name="media_id" defaultValue="" />
-                                        <i className="fas fa-cloud-upload-alt"></i>
-                                        <p className="photoUpload-drop">
-                                            Kéo và thả hình vào đây
-                                        </p>
-                                        <p className="photoUpload-or">hoặc</p>
-                                        <p className="photoUpload-choose btn btn-sm bg-gradient-success">
-                                            Chọn hình
-                                        </p>
-                                    </label>
-                                    <div className="photoUpload-dimension">
-                                        Width: 300 px - Height: 200 px
-                                        (.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card mb-4">
-                        <div className="card-header custom border-bottom">
-                            <h4>Gallery</h4>
-                        </div>
-                        <div className="card-body">
-                            <div className="mt-3 mb-3">
-                                <div className="appendMutipleFiles">
-                                    <div
-                                        className="file-item"
-                                        id="deleteMediaItem__{{ $item->media->id }}"
-                                    >
-                                        <img src="" alt="" />
-                                        <input type="hidden" name="media[]" defaultValue="" />
-                                        <button
-                                            type="button"
-                                            className="deleteMediaItem"
-                                            data-element="#deleteMediaItem__{{ $item->media->id }}"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                fill="currentColor"
-                                                className="bi bi-x-lg"
-                                                viewBox="0 0 16 16"
-                                            >
-                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="photoUpload-zone">
-                                    <label
-                                        className="photoUpload-file"
-                                        id="photo-zone"
-                                        htmlFor="file-zones"
-                                    >
-                                        <input
-                                            type="file"
-                                            name="files"
-                                            multiple
-                                            id="file-zones"
+                                        <input type="file" name="file" id="file-zone"
+                                            onChange={handlePhoto}
                                         />
                                         <i className="fas fa-cloud-upload-alt"></i>
                                         <p className="photoUpload-drop">
@@ -491,12 +471,81 @@ export default function ProductEdit({ productId, product }: { productId: number,
                                         </p>
                                     </label>
                                     <div className="photoUpload-dimension">
-                                        Width: 300 px - Height: 200 px
+                                        Width: {formData?.photo.width} px - Height: {formData?.photo.height} px
                                         (.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF)
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="card mb-4">
+                        <div className="card-header custom border-bottom">
+                            <h4>Gallery</h4>
+                        </div>
+                        {product.gallery && product.gallery.length > 0 &&
+                            <div className="card-body">
+                                <div className="mt-3 mb-3">
+                                    <div className="appendMutipleFiles">
+                                        {product.gallery.map((gallery: any, key: number) => {
+                                            return (
+                                                <div
+                                                    className="file-item"
+                                                    key={key}
+                                                >
+                                                    <Image
+                                                        src={gallery.path}
+                                                        width={gallery.width}
+                                                        height={gallery.height}
+                                                        alt={product.name}
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        className="deleteMediaItem"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="16"
+                                                            height="16"
+                                                            fill="currentColor"
+                                                            className="bi bi-x-lg"
+                                                            viewBox="0 0 16 16"
+                                                        >
+                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                    <div className="photoUpload-zone">
+                                        <label
+                                            className="photoUpload-file"
+                                            id="photo-zone"
+                                            htmlFor="file-zones"
+                                        >
+                                            <input
+                                                type="file"
+                                                name="files"
+                                                multiple
+                                                id="file-zones"
+                                            />
+                                            <i className="fas fa-cloud-upload-alt"></i>
+                                            <p className="photoUpload-drop">
+                                                Kéo và thả hình vào đây
+                                            </p>
+                                            <p className="photoUpload-or">hoặc</p>
+                                            <p className="photoUpload-choose btn btn-sm bg-gradient-success">
+                                                Chọn hình
+                                            </p>
+                                        </label>
+                                        <div className="photoUpload-dimension">
+                                            Width: 300 px - Height: 200 px
+                                            (.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
