@@ -50,47 +50,53 @@ export default async function AdminProductVariants({
                   </tr>
                 </thead>
                 <tbody className="table-border-bottom-0">
-                  {
-                    variants && variants.length > 0 && variants.map((variant: any) => {
-                      return <tr key={variant.id}>
-                        <td>{variant.id}</td>
-                        <td>
-                          <a className="strong-name" href="">
-                            <strong>{variant.name}</strong>
-                          </a>
-                        </td>
-                        <td>
-                          {formatPrice(variant.regular_price)}<sup>đ</sup>
-                        </td>
-                        <td>
-                          {formatPrice(variant.sale_price)}<sup>đ</sup>
-                        </td>
-                        <td>{formatPrice(variant.inventory)}</td>
-                        <td>{variant.created_at}</td>
-                        <td>{variant.updated_at}</td>
-                        <td>
-                          <span className="badge badge-published">Published</span>
-                        </td>
-                        <td>
-                          <div className="dropdown">
-                            <Link
-                              className="btn btn-secondary btn-custom"
-                              href={`/admin/products/${productId}/variants/${variant.id}`}
-                            >
-                              <span>
-                                <SvgEdit />
-                              </span>
-                            </Link>
-                            <button className="btn btn-danger btn-custom ms-2 btnDelete">
-                              <span>
-                                <SvgTrash />
-                              </span>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    })
-                  }
+                  {variants &&
+                    variants.length > 0 &&
+                    variants.map((variant: any) => {
+                      return (
+                        <tr key={variant.id}>
+                          <td>{variant.id}</td>
+                          <td>
+                            <a className="strong-name" href="">
+                              <strong>{variant.name}</strong>
+                            </a>
+                          </td>
+                          <td>
+                            {formatPrice(variant.regular_price)}
+                            <sup>đ</sup>
+                          </td>
+                          <td>
+                            {formatPrice(variant.sale_price)}
+                            <sup>đ</sup>
+                          </td>
+                          <td>{formatPrice(variant.inventory)}</td>
+                          <td>{variant.created_at}</td>
+                          <td>{variant.updated_at}</td>
+                          <td>
+                            <span className={`badge badge-${variant.status}`}>
+                              {variant.status}
+                            </span>
+                          </td>
+                          <td>
+                            <div className="dropdown">
+                              <Link
+                                className="btn btn-secondary btn-custom"
+                                href={`/admin/products/${productId}/variants/${variant.id}`}
+                              >
+                                <span>
+                                  <SvgEdit />
+                                </span>
+                              </Link>
+                              <button className="btn btn-danger btn-custom ms-2 btnDelete">
+                                <span>
+                                  <SvgTrash />
+                                </span>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>

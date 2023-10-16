@@ -39,3 +39,19 @@ export const updateVariantByProduct = async (productID: number, variantID: numbe
     });
     return await res.json();
 }
+export const createTagByProduct = async (productID: number, data: any) => {
+    const res = await fetchAdmin(`products/${productID}/tags`, {
+        cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+    return await res.json();
+}
+export const createCategoryByProduct = async (productID: number, data: any) => {
+    const res = await fetchAdmin(`products/${productID}/category`, {
+        cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+    return await res.json();
+}
