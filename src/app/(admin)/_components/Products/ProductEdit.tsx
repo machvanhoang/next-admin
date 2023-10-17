@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { fetchAdmin } from "@/lib/fetch";
+import { formatPrice } from "@/helpers";
 import { uploadMedia } from "@/services/MediaService";
 import {
   createTagByProduct,
@@ -308,8 +309,9 @@ export default function ProductEdit({
                       {formData.variants.map((variant: any) => {
                         return (
                           <li key={variant.id}>
-                            {variant.name} - {variant.regularPrice} -{" "}
-                            {variant.salePrice}
+                            {variant.name} - {formatPrice(variant.regularPrice)}{" "}
+                            <sup>đ</sup> - {formatPrice(variant.salePrice)}{" "}
+                            <sup>đ</sup>
                           </li>
                         );
                       })}

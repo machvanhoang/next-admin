@@ -2,9 +2,13 @@ import Link from "next/link";
 import Paginate from "@/AdminComponent/Paginate";
 import { formatPrice } from "@/helpers";
 import { SvgPlus, SvgEdit, SvgTrash } from "@/AdminComponent/Svg";
-import { getProducts } from "@/services/ProductServices"
+import { getProducts } from "@/services/ProductServices";
 import { notFound } from "next/navigation";
-export default async function AdminProduct({ searchParams }: { searchParams: { page: number } }) {
+export default async function AdminProduct({
+  searchParams,
+}: {
+  searchParams: { page: number };
+}) {
   const { page } = searchParams;
   const { success, products } = await getProducts(page);
   if (!success) {
@@ -81,7 +85,9 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
                           <td>{product.dateCreate}</td>
                           <td>{product.dateUpdate}</td>
                           <td>
-                            <span className={`badge badge-published ${product.status}`}>
+                            <span
+                              className={`badge badge-published ${product.status}`}
+                            >
                               {product.status}
                             </span>
                           </td>
@@ -110,7 +116,11 @@ export default async function AdminProduct({ searchParams }: { searchParams: { p
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <Paginate links={links} current_page={meta.current_page} />
+            <Paginate
+              links={links}
+              url={`/admin/products`}
+              current_page={meta.current_page}
+            />
           </div>
         </div>
       </div>

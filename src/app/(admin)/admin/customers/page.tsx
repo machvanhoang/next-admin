@@ -1,13 +1,19 @@
 import Link from "next/link";
 import Paginate from "@/AdminComponent/Paginate";
 import { SvgPlus, SvgEdit, SvgTrash } from "@/AdminComponent/Svg";
-import { fetchAdmin } from "@/lib/fetch";
-async function getCustomers() {
-  const res = await fetchAdmin("http://localhost:3000/customers.json");
-  return await res.json();
-}
-export default async function AdminCustomers() {
-  const customers = await getCustomers();
+import { notFound } from "next/navigation";
+import { getCustomers } from "@/services/CustomerService";
+export default async function AdminCustomers({
+  searchParams,
+}: {
+  searchParams: { page: number };
+}) {
+  const { page } = searchParams;
+  const { success, customers } = await getCustomers(page);
+  if (!success) {
+    return notFound();
+  }
+  const { links, data, meta } = customers;
   return (
     <>
       <div className="d-flex justify-content-between mb-3">
@@ -42,56 +48,60 @@ export default async function AdminCustomers() {
                   </tr>
                 </thead>
                 <tbody className="table-border-bottom-0">
-                  {customers &&
-                    customers.length &&
-                    customers.map((customer: any, key: number) => {
-                      return (
-                        <tr key={key}>
-                          <td>{key}</td>
-                          <td>
+                  {data?.map((customer: any) => {
+                    return (
+                      <tr key={customer.id}>
+                        <td>{customer.id}</td>
+                        <td>
+                          <Link
+                            className="strong-name"
+                            href={`/admin/customers/${customer.id}`}
+                          >
+                            <strong>{customer.full_name}</strong>
+                          </Link>
+                        </td>
+                        <td>{customer.username}</td>
+                        <td>{customer.email}</td>
+                        <td>{customer.phone}</td>
+                        <td>{new Date().toDateString()}</td>
+                        <td>{new Date().toDateString()}</td>
+                        <td>
+                          <span
+                            className={`badge badge-${customer.status?.class}`}
+                          >
+                            {customer.status?.name}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="dropdown">
                             <Link
-                              className="strong-name"
-                              href={`/admin/customers/${key}`}
+                              className="btn btn-secondary btn-custom"
+                              href={`/admin/customers/${customer.id}`}
                             >
-                              <strong>{customer.full_name}</strong>
+                              <span>
+                                <SvgEdit />
+                              </span>
                             </Link>
-                          </td>
-                          <td>{customer.username}</td>
-                          <td>{customer.email}</td>
-                          <td>{customer.phone}</td>
-                          <td>{new Date().toDateString()}</td>
-                          <td>{new Date().toDateString()}</td>
-                          <td>
-                            <span className="badge badge-published">
-                              Published
-                            </span>
-                          </td>
-                          <td>
-                            <div className="dropdown">
-                              <Link
-                                className="btn btn-secondary btn-custom"
-                                href={`/admin/customers/${key}`}
-                              >
-                                <span>
-                                  <SvgEdit />
-                                </span>
-                              </Link>
-                              <button className="btn btn-danger btn-custom ms-2 btnDelete">
-                                <span>
-                                  <SvgTrash />
-                                </span>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                            <button className="btn btn-danger btn-custom ms-2 btnDelete">
+                              <span>
+                                <SvgTrash />
+                              </span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
           </div>
           <div className="d-flex justify-content-center mt-3">
-            <Paginate />
+            <Paginate
+              links={links}
+              url={`/admin/customers`}
+              current_page={meta.current_page}
+            />
           </div>
         </div>
       </div>
